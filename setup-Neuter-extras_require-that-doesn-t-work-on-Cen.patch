@@ -1,0 +1,47 @@
+From 3eeef7b62131a1dbcbb2758eb9eb382578ddd0fb Mon Sep 17 00:00:00 2001
+From: Colin Walters <walters@verbum.org>
+Date: Tue, 3 May 2016 16:35:24 +0200
+Subject: [PATCH] setup: Neuter extras_require that doesn't work on CentOS 7
+
+I think the version of python-setuputils is too old or something.
+---
+ setup.py | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/setup.py b/setup.py
+index 9fc4ad6..6167419 100644
+--- a/setup.py
++++ b/setup.py
+@@ -29,13 +29,13 @@ requirements = [
+ if sys.platform == 'win32':
+     requirements.append('pypiwin32 >= 219')
+ 
+-extras_require = {
+-    ':python_version < "3.5"': 'backports.ssl_match_hostname >= 3.5',
+-    # While not imported explicitly, the ipaddress module is required for
+-    # ssl_match_hostname to verify hosts match with certificates via
+-    # ServerAltname: https://pypi.python.org/pypi/backports.ssl_match_hostname
+-    ':python_version < "3.3"': 'ipaddress >= 1.0.16',
+-}
++# extras_require = {
++#     ':python_version < "3.5"': 'backports.ssl_match_hostname >= 3.5',
++#     # While not imported explicitly, the ipaddress module is required for
++#     # ssl_match_hostname to verify hosts match with certificates via
++#     # ServerAltname: https://pypi.python.org/pypi/backports.ssl_match_hostname
++#     ':python_version < "3.3"': 'ipaddress >= 1.0.16',
++# }
+ 
+ version = None
+ exec(open('docker/version.py').read())
+@@ -62,7 +62,7 @@ setup(
+     packages=find_packages(exclude=["tests.*", "tests"]),
+     install_requires=requirements,
+     tests_require=test_requirements,
+-    extras_require=extras_require,
++    # extras_require=extras_require,
+     zip_safe=False,
+     test_suite='tests',
+     classifiers=[
+-- 
+2.11.0
+
