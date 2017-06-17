@@ -1,0 +1,20 @@
+--- docker-2.3.0/setup.py.orig	2017-06-17 19:13:40.407659006 +0200
++++ docker-2.3.0/setup.py	2017-06-17 23:59:41.257956716 +0200
+@@ -5,17 +5,8 @@
+ import os
+ import sys
+ 
+-import pip
+-
+ from setuptools import setup, find_packages
+ 
+-if 'docker-py' in [x.project_name for x in pip.get_installed_distributions()]:
+-    print(
+-        'ERROR: "docker-py" needs to be uninstalled before installing this'
+-        ' package:\npip uninstall docker-py', file=sys.stderr
+-    )
+-    sys.exit(1)
+-
+ ROOT_DIR = os.path.dirname(__file__)
+ SOURCE_DIR = os.path.join(ROOT_DIR)
+ 

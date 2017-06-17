@@ -15,7 +15,7 @@
 
 Name:           python-%{srcname}
 Version:        2.3.0
-Release:        1%{?dist}
+Release:        1.1%{?dist}
 Summary:        A Python library for the Docker Engine API
 License:        ASL 2.0
 URL:            https://pypi.python.org/pypi/%{srcname}
@@ -27,6 +27,9 @@ Patch1:         unpin-test-requirements.patch
 
 # Python packages mentioned in `extras_require` are not available in CentOS
 Patch2:         setup-Neuter-extras_require-that-doesn-t-work-on-Cen.patch
+
+# Drop unneded pip dependency in setup.py
+Patch3:         setup-Drop-pip.patch
 
 BuildArch:      noarch
 BuildRequires:  python2-devel
