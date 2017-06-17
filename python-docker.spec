@@ -28,6 +28,9 @@ Patch1:         unpin-test-requirements.patch
 # Python packages mentioned in `extras_require` are not available in CentOS
 Patch2:         setup-Neuter-extras_require-that-doesn-t-work-on-Cen.patch
 
+# Drop unneded pip dependency in setup.py
+Patch3:         setup-Drop-pip.patch
+
 BuildArch:      noarch
 BuildRequires:  python2-devel
 BuildRequires:  python2-setuptools
