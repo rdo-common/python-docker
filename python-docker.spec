@@ -30,7 +30,7 @@ Patch2:         setup-Neuter-extras_require-that-doesn-t-work-on-Cen.patch
 
 BuildArch:      noarch
 BuildRequires:  python2-devel
-BuildRequires:  python-setuptools
+BuildRequires:  python2-setuptools
 
 %description
 It lets you do anything the docker command does, but from within Python apps –
@@ -42,22 +42,22 @@ Summary:        A Python library for the Docker Engine API
 %{?python_provide:%python_provide python2-%{srcname}}
 
 %if %{with tests}
-BuildRequires:  python-requests
-BuildRequires:  python-mock >= 1.0.1
-BuildRequires:  python-flake8 >= 2.4.1
+BuildRequires:  python2-requests
+BuildRequires:  python2-mock >= 1.0.1
+BuildRequires:  python2-flake8 >= 2.4.1
 BuildRequires:  python-pytest-cov >= 2.1.0
 BuildRequires:  python2-pytest >= 2.9.1
-BuildRequires:  python-coverage >= 3.7.1
+BuildRequires:  python2-coverage >= 3.7.1
 BuildRequires:  python-backports-ssl_match_hostname
-BuildRequires:  python-six >= 1.4.0
+BuildRequires:  python2-six >= 1.4.0
 BuildRequires:  python-websocket-client >= 0.32.0
 BuildRequires:  python-ipaddress
 BuildRequires:  python2-docker-pycreds
 %endif  # tests
 
-Requires:       python-requests
+Requires:       python2-requests
 Requires:       python-websocket-client >= 0.32.0
-Requires:       python-six >= 1.4.0
+Requires:       python2-six >= 1.4.0
 Requires:       python-ipaddress
 Requires:       python-backports-ssl_match_hostname
 Requires:       python2-docker-pycreds
