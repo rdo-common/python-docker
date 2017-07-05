@@ -15,7 +15,7 @@
 
 Name:           python-%{srcname}
 Version:        2.4.2
-Release:        1%{?dist}
+Release:        1.1%{?dist}
 Summary:        A Python library for the Docker Engine API
 License:        ASL 2.0
 URL:            https://pypi.python.org/pypi/%{srcname}
@@ -66,6 +66,9 @@ Requires:       python-backports-ssl_match_hostname
 Requires:       python2-docker-pycreds
 
 Obsoletes: %{py2_docker_py_1} < 1:2.0
+Obsoletes: python-docker-py < 1:2.0
+# docker-py v2 is not fully backward compatible but should be good enough
+Provides: python-docker-py = %{version}-%{release}
 
 %description -n python2-%{srcname}
 It lets you do anything the docker command does, but from within Python apps –
