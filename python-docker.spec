@@ -15,7 +15,7 @@
 
 Name:           python-%{srcname}
 Version:        2.4.2
-Release:        1.1%{?dist}
+Release:        1.2%{?dist}
 Summary:        A Python library for the Docker Engine API
 License:        ASL 2.0
 URL:            https://pypi.python.org/pypi/%{srcname}
@@ -55,7 +55,7 @@ BuildRequires:  python-backports-ssl_match_hostname
 BuildRequires:  python2-six >= 1.4.0
 BuildRequires:  python-websocket-client >= 0.32.0
 BuildRequires:  python-ipaddress
-BuildRequires:  python2-docker-pycreds
+BuildRequires:  python-docker-pycreds
 %endif  # tests
 
 Requires:       python2-requests
@@ -63,7 +63,7 @@ Requires:       python-websocket-client >= 0.32.0
 Requires:       python2-six >= 1.4.0
 Requires:       python-ipaddress
 Requires:       python-backports-ssl_match_hostname
-Requires:       python2-docker-pycreds
+Requires:       python-docker-pycreds
 
 Obsoletes: %{py2_docker_py_1} < 1:2.0
 Obsoletes: python-docker-py < 1:2.0
