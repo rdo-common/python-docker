@@ -15,7 +15,7 @@
 
 Name:           python-%{srcname}
 Version:        2.4.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Python library for the Docker Engine API
 License:        ASL 2.0
 URL:            https://pypi.python.org/pypi/%{srcname}
@@ -147,6 +147,9 @@ PYTHONPATH="${PWD}" py.test-%{python3_version} tests/unit/ || :
 %endif # with_python3
 
 %changelog
+* Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 2.4.2-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
 * Fri Jun 30 2017 Tomas Tomecek <ttomecek@redhat.com> - 2.4.2-1
 - new upstream release: 2.4.2
 
