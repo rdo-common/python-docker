@@ -63,6 +63,7 @@ Requires:       python-backports-ssl_match_hostname
 Requires:       python2-docker-pycreds
 
 Obsoletes: %{py2_docker_py_1} < 1:2.0
+Provides: %{py2_docker_py_1} == %{version}-%{release}
 
 %description -n python2-%{srcname}
 It lets you do anything the docker command does, but from within Python apps –
@@ -92,6 +93,7 @@ Requires:       python3-six >= 1.3.0
 Requires:       python3-docker-pycreds
 
 Obsoletes: %{py3_docker_py_1} < 1:2.0
+Provides: %{py3_docker_py_1} == %{version}-%{release}
 
 %description -n python3-%{srcname}
 It lets you do anything the docker command does, but from within Python apps –
