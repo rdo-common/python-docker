@@ -14,7 +14,7 @@
 %global py3_docker_py_1 python3-docker-py
 
 Name:           python-%{srcname}
-Version:        2.5.0
+Version:        2.5.1
 Release:        1%{?dist}
 Summary:        A Python library for the Docker Engine API
 License:        ASL 2.0
@@ -149,6 +149,9 @@ PYTHONPATH="${PWD}" py.test-%{python3_version} tests/unit/ || :
 %endif # with_python3
 
 %changelog
+* Wed Aug 23 2017 Tomas Tomecek <ttomecek@redhat.com> - 2.5.1-1
+- new upstream release: 2.5.1
+
 * Mon Aug 21 2017 Tomas Tomecek <ttomecek@redhat.com> - 2.5.0-1
 - new upstream release: 2.5.0
 
