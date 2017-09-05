@@ -25,8 +25,11 @@ Source0:        https://files.pythonhosted.org/packages/source/d/%{srcname}/%{sr
 # we have those in Fedora in different versions
 Patch1:         unpin-test-requirements.patch
 
-# Python packages mentioned in `extras_require` are not available in CentOS
-Patch2:         setup-Neuter-extras_require-that-doesn-t-work-on-Cen.patch
+# Upstream uses environment markers to conditionally apply some dependencies.
+# Environment markers were first added in setuptools 20.6.8, so that doesn't
+# work in RHEL.  This patch converts those environment markers into simple if
+# statements.
+Patch2:         remove-environment-markers.patch
 
 # Upstream uses pip to check if the older docker-py module is installed.  We
 # handle that with an obsolete.
@@ -155,6 +158,7 @@ PYTHONPATH="${PWD}" py.test-%{python3_version} tests/unit/ || :
 %changelog
 * Tue Sep 05 2017 Carl George <carl@george.computer> - 2.5.1-2
 - Add patch3 to remove pip dependency
+- Rewrite patch2 to conditionally apply extra dependencies
 
 * Wed Aug 23 2017 Tomas Tomecek <ttomecek@redhat.com> - 2.5.1-1
 - new upstream release: 2.5.1
