@@ -15,7 +15,7 @@
 
 Name:           python-%{srcname}
 Version:        2.5.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Python library for the Docker Engine API
 License:        ASL 2.0
 URL:            https://pypi.python.org/pypi/%{srcname}
@@ -27,6 +27,10 @@ Patch1:         unpin-test-requirements.patch
 
 # Python packages mentioned in `extras_require` are not available in CentOS
 Patch2:         setup-Neuter-extras_require-that-doesn-t-work-on-Cen.patch
+
+# Upstream uses pip to check if the older docker-py module is installed.  We
+# handle that with an obsolete.
+Patch3:         remove-pip-dependency.patch
 
 BuildArch:      noarch
 BuildRequires:  python2-devel
@@ -149,6 +153,9 @@ PYTHONPATH="${PWD}" py.test-%{python3_version} tests/unit/ || :
 %endif # with_python3
 
 %changelog
+* Tue Sep 05 2017 Carl George <carl@george.computer> - 2.5.1-2
+- Add patch3 to remove pip dependency
+
 * Wed Aug 23 2017 Tomas Tomecek <ttomecek@redhat.com> - 2.5.1-1
 - new upstream release: 2.5.1
 

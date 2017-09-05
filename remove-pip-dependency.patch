@@ -1,0 +1,21 @@
+diff -Nurp docker-2.5.1.orig/setup.py docker-2.5.1/setup.py
+--- docker-2.5.1.orig/setup.py	2017-08-22 18:44:35.000000000 -0500
++++ docker-2.5.1/setup.py	2017-09-05 11:56:27.542146668 -0500
+@@ -5,17 +5,8 @@ import codecs
+ import os
+ import sys
+ 
+-import pip
+-
+ from setuptools import setup, find_packages
+ 
+-if 'docker-py' in [x.project_name for x in pip.get_installed_distributions()]:
+-    print(
+-        'ERROR: "docker-py" needs to be uninstalled before installing this'
+-        ' package:\npip uninstall docker-py', file=sys.stderr
+-    )
+-    sys.exit(1)
+-
+ ROOT_DIR = os.path.dirname(__file__)
+ SOURCE_DIR = os.path.join(ROOT_DIR)
+ 
