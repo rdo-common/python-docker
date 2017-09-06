@@ -2,8 +2,6 @@
 # Do not build bindings for python3 for RHEL <= 7
 %bcond_with python3
 %bcond_with tests
-%global py2_build %{__python} setup.py build '--executable=/usr/bin/python2 -s'
-%global py2_install %{__python} setup.py install --root %{buildroot}
 %else
 %bcond_without python3
 %bcond_without tests
@@ -130,12 +128,12 @@ rm -fr docker.egg-info
 
 %check
 %if %{with tests}
-PYTHONPATH="${PWD}" py.test-%{python2_version} tests/unit/ || :
+%{__python2} -m pytest -v tests/unit/
 %endif
 
 %if %{with python3}
 %if %{with tests}
-PYTHONPATH="${PWD}" py.test-%{python3_version} tests/unit/ || :
+%{__python3} -m pytest -v tests/unit/
 %endif # tests
 %endif # with_python3
 
@@ -143,19 +141,13 @@ PYTHONPATH="${PWD}" py.test-%{python3_version} tests/unit/ || :
 %files -n python2-%{srcname}
 %license LICENSE
 %doc README.md
-%dir %{python_sitelib}/docker
-%dir %{python_sitelib}/docker-%{version}-py2*.egg-info
-%{python_sitelib}/docker/*
-%{python_sitelib}/docker-%{version}-py2*.egg-info/*
+%{python2_sitelib}/*
 
 %if %{with python3}
 %files -n python3-%{srcname}
 %license LICENSE
 %doc README.md
-%dir %{python3_sitelib}/docker
-%dir %{python3_sitelib}/docker-%{version}-py3*.egg-info
-%{python3_sitelib}/docker/*
-%{python3_sitelib}/docker-%{version}-py3*.egg-info/*
+%{python3_sitelib}/*
 %endif # with_python3
 
 %changelog
