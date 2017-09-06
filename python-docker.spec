@@ -10,8 +10,6 @@
 %endif
 
 %global srcname docker
-%global py2_docker_py_1 python2-docker-py
-%global py3_docker_py_1 python3-docker-py
 
 Name:           python-%{srcname}
 Version:        2.5.1
@@ -68,7 +66,11 @@ Requires:       python%{?fedora:2}-docker-pycreds >= 0.2.1
 Requires:       python%{?fedora:2}-backports-ssl_match_hostname >= 3.5
 Requires:       python-ipaddress >= 1.0.16
 
-Obsoletes: %{py2_docker_py_1} < 1:2.0
+%if 0%{?fedora} >= 26
+Obsoletes:      python-docker-py < 1:2
+%else
+Obsoletes:      python-docker-py < 2
+%endif
 
 %description -n python2-%{srcname}
 It lets you do anything the docker command does, but from within Python apps –
@@ -97,7 +99,11 @@ Requires:       python3-six >= 1.4.0
 Requires:       python3-websocket-client >= 0.32.0
 Requires:       python3-docker-pycreds >= 0.2.1
 
-Obsoletes: %{py3_docker_py_1} < 1:2.0
+%if 0%{?fedora} >= 26
+Obsoletes:      python3-docker-py < 1:2
+%else
+Obsoletes:      python3-docker-py < 2
+%endif
 
 %description -n python3-%{srcname}
 It lets you do anything the docker command does, but from within Python apps –
@@ -158,6 +164,7 @@ PYTHONPATH="${PWD}" py.test-%{python3_version} tests/unit/ || :
 - Rewrite patch2 to conditionally apply extra dependencies
 - Update dependencies to be RHEL-compatible
 - Don't provide python-docker-py
+- Update obsoletes to be RHEL-compatible
 
 * Wed Aug 23 2017 Tomas Tomecek <ttomecek@redhat.com> - 2.5.1-1
 - new upstream release: 2.5.1
