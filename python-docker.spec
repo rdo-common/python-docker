@@ -36,8 +36,6 @@ Patch2:         remove-environment-markers.patch
 Patch3:         remove-pip-dependency.patch
 
 BuildArch:      noarch
-BuildRequires:  python2-devel
-BuildRequires:  python2-setuptools
 
 %description
 It lets you do anything the docker command does, but from within Python apps –
@@ -48,26 +46,27 @@ run containers, manage containers, manage Swarms, etc.
 Summary:        A Python library for the Docker Engine API
 %{?python_provide:%python_provide python2-%{srcname}}
 
+BuildRequires:  python2-devel
+BuildRequires:  python%{?fedora:2}-setuptools
 %if %{with tests}
-BuildRequires:  python2-requests
 BuildRequires:  python2-mock >= 1.0.1
-BuildRequires:  python2-flake8 >= 2.4.1
-BuildRequires:  python-pytest-cov >= 2.1.0
-BuildRequires:  python2-pytest >= 2.9.1
-BuildRequires:  python2-coverage >= 3.7.1
-BuildRequires:  python-backports-ssl_match_hostname
-BuildRequires:  python2-six >= 1.4.0
+BuildRequires:  %{?fedora:python2-}pytest >= 2.9.1
+BuildRequires:  python%{?fedora:2}-coverage >= 3.7.1
+BuildRequires:  python2-pytest-cov >= 2.1.0
+BuildRequires:  python%{?fedora:2}-flake8 >= 2.4.1
+BuildRequires:  python%{?fedora:2}-requests >= 2.5.2
+BuildRequires:  python%{?fedora:2}-six >= 1.4.0
 BuildRequires:  python-websocket-client >= 0.32.0
-BuildRequires:  python-ipaddress
-BuildRequires:  python2-docker-pycreds
+BuildRequires:  python%{?fedora:2}-docker-pycreds >= 0.2.1
+BuildRequires:  python%{?fedora:2}-backports-ssl_match_hostname >= 3.5
+BuildRequires:  python-ipaddress >= 1.0.16
 %endif  # tests
-
-Requires:       python2-requests
+Requires:       python%{?fedora:2}-requests >= 2.5.2
+Requires:       python%{?fedora:2}-six >= 1.4.0
 Requires:       python-websocket-client >= 0.32.0
-Requires:       python2-six >= 1.4.0
-Requires:       python-ipaddress
-Requires:       python-backports-ssl_match_hostname
-Requires:       python2-docker-pycreds
+Requires:       python%{?fedora:2}-docker-pycreds >= 0.2.1
+Requires:       python%{?fedora:2}-backports-ssl_match_hostname >= 3.5
+Requires:       python-ipaddress >= 1.0.16
 
 Obsoletes: %{py2_docker_py_1} < 1:2.0
 Provides: %{py2_docker_py_1} == %{version}-%{release}
@@ -86,18 +85,18 @@ BuildRequires:  python3-setuptools
 %if %{with tests}
 BuildRequires:  python3-mock >= 1.0.1
 BuildRequires:  python3-pytest >= 2.9.1
-BuildRequires:  python3-pytest-cov >= 2.1.0
 BuildRequires:  python3-coverage >= 3.7.1
+BuildRequires:  python3-pytest-cov >= 2.1.0
 BuildRequires:  python3-flake8 >= 2.4.1
-BuildRequires:  python3-six >= 1.3.0
-BuildRequires:  python3-websocket-client >= 0.32.0
 BuildRequires:  python3-requests >= 2.5.2
-BuildRequires:  python3-docker-pycreds
+BuildRequires:  python3-six >= 1.4.0
+BuildRequires:  python3-websocket-client >= 0.32.0
+BuildRequires:  python3-docker-pycreds >= 0.2.1
 %endif  # tests
+Requires:       python3-requests >= 2.5.2
+Requires:       python3-six >= 1.4.0
 Requires:       python3-websocket-client >= 0.32.0
-Requires:       python3-requests
-Requires:       python3-six >= 1.3.0
-Requires:       python3-docker-pycreds
+Requires:       python3-docker-pycreds >= 0.2.1
 
 Obsoletes: %{py3_docker_py_1} < 1:2.0
 Provides: %{py3_docker_py_1} == %{version}-%{release}
@@ -159,6 +158,7 @@ PYTHONPATH="${PWD}" py.test-%{python3_version} tests/unit/ || :
 * Tue Sep 05 2017 Carl George <carl@george.computer> - 2.5.1-2
 - Add patch3 to remove pip dependency
 - Rewrite patch2 to conditionally apply extra dependencies
+- Update dependencies to be RHEL-compatible
 
 * Wed Aug 23 2017 Tomas Tomecek <ttomecek@redhat.com> - 2.5.1-1
 - new upstream release: 2.5.1
