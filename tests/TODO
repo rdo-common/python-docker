@@ -1,0 +1,1 @@
+* build RPMs locally and inject them inside atomic host VM (local testing should not rely on repositories)

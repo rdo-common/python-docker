@@ -7,3 +7,6 @@
 /docker-2.5.1.tar.gz
 /docker-2.6.0.tar.gz
 /docker-2.6.1.tar.gz
+tests/artifacts/
+tests/tests.retry
+tests/atomic.qcow2

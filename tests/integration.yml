@@ -1,0 +1,67 @@
+---
+- hosts: localhost
+  vars:
+  - artifacts: ./artifacts
+  - remote_artifacts: /root/artifacts
+  tasks:
+  - name: Make local artifacts directory
+    file: path={{ artifacts }} state=directory owner=root mode=755 recurse=yes
+    tags:
+      - classic
+
+  - name: Make artifacts directory on Atomic Host
+    file: path={{ remote_artifacts }} state=directory owner=root mode=755 recurse=yes
+    tags:
+      - atomic
+
+  - name: Install pytest and the test-suite locally
+    dnf:
+      name: "{{ item }}"
+      state: present
+    tags:
+      - classic
+    with_items:
+      - python-docker-tests
+      - python2-pytest
+
+  - name: Install pytest and the test-suite on Atomic Host
+    shell: rpm-ostree install python2-pytest python-docker-tests && rpm-ostree ex livefs
+    tags:
+      - atomic
+
+  - name: Ensure dockerd is running
+    service:
+      name: docker
+      state: started
+    tags:
+      - atomic
+      - classic
+
+  - name: Atomic Host test block
+    block:
+      - name: Run integration test-suite on Atomic Host
+        # -k "test_create_with_restart_policy" for local testing
+        shell: py.test -v ./tests/integration/ | tee {{ remote_artifacts }}/test.log
+        args:
+          chdir: /usr/libexec/installed-tests/python-docker/
+    always:
+      - name: Pull out the artifacts
+        fetch:
+          dest: "{{ artifacts }}/"
+          src: "{{ remote_artifacts }}/test.log"
+    tags:
+      - atomic
+
+  - name: Get abspath of artifacts dir
+    command: realpath {{ artifacts }}
+    register: artifacts_abs
+    tags:
+      - classic
+
+  - name: Run integration test-suite locally
+    # -k "test_create_with_restart_policy" for local testing
+    shell: py.test -v ./tests/integration/ | tee {{ artifacts_abs.stdout }}/test.log
+    args:
+      chdir: /usr/libexec/installed-tests/python-docker/
+    tags:
+      - classic

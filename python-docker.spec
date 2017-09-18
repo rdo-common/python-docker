@@ -11,7 +11,7 @@
 
 Name:           python-%{srcname}
 Version:        2.6.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Python library for the Docker Engine API
 License:        ASL 2.0
 URL:            https://pypi.python.org/pypi/%{srcname}
@@ -74,6 +74,23 @@ Obsoletes:      python-docker-py < 2
 It lets you do anything the docker command does, but from within Python apps –
 run containers, manage containers, manage Swarms, etc.
 
+%package tests
+Summary:        Unit tests and integration tests for python-docker
+Requires:       python2-%{srcname}
+Requires:       python2-mock >= 1.0.1
+Requires:       %{?fedora:python2-}pytest >= 2.9.1
+Requires:       python%{?fedora:2}-coverage >= 3.7.1
+Requires:       python2-pytest-cov >= 2.1.0
+Requires:       python%{?fedora:2}-flake8 >= 2.4.1
+Requires:       python%{?fedora:2}-requests >= 2.5.2
+Requires:       python%{?fedora:2}-six >= 1.4.0
+Requires:       python-websocket-client >= 0.32.0
+Requires:       python%{?fedora:2}-docker-pycreds >= 0.2.1
+Requires:       python%{?fedora:2}-backports-ssl_match_hostname >= 3.5
+Requires:       python-ipaddress >= 1.0.16
+%description tests
+Upstream test-suite (unit, integration) packaged as RPM.
+
 %if %{with python3}
 %package -n python3-%{srcname}
 Summary:        A Python library for the Docker Engine API
@@ -126,6 +143,10 @@ rm -fr docker.egg-info
 %py3_install
 %endif # with_python3
 
+# copy tests to /usr/libexec/installed-tests
+mkdir -p %{buildroot}%{_libexecdir}/installed-tests/%{name}
+cp -avr tests/ %{buildroot}%{_libexecdir}/installed-tests/%{name}/
+
 %check
 %if %{with tests}
 %{__python2} -m pytest -v tests/unit/
@@ -150,7 +171,13 @@ rm -fr docker.egg-info
 %{python3_sitelib}/*
 %endif # with_python3
 
+%files tests
+%{_libexecdir}/installed-tests
+
 %changelog
+* Tue Nov 28 2017 Tomas Tomecek <ttomecek@redhat.com> - 2.6.1-2
+- Package tests
+
 * Thu Nov 09 2017 Tomas Tomecek <ttomecek@redhat.com> - 2.6.1-1
 - new upstream release: 2.6.1
 
