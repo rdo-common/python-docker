@@ -10,8 +10,8 @@
 %global srcname docker
 
 Name:           python-%{srcname}
-Version:        2.5.1
-Release:        2%{?dist}
+Version:        2.6.0
+Release:        1%{?dist}
 Summary:        A Python library for the Docker Engine API
 License:        ASL 2.0
 URL:            https://pypi.python.org/pypi/%{srcname}
@@ -151,6 +151,9 @@ rm -fr docker.egg-info
 %endif # with_python3
 
 %changelog
+* Wed Nov 08 2017 Tomas Tomecek <ttomecek@redhat.com> - 2.6.0-1
+- new upstream release: 2.6.0
+
 * Tue Sep 05 2017 Carl George <carl@george.computer> - 2.5.1-2
 - Add patch3 to remove pip dependency
 - Rewrite patch2 to conditionally apply extra dependencies
