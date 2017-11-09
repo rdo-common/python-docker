@@ -10,7 +10,7 @@
 %global srcname docker
 
 Name:           python-%{srcname}
-Version:        2.6.0
+Version:        2.6.1
 Release:        1%{?dist}
 Summary:        A Python library for the Docker Engine API
 License:        ASL 2.0
@@ -151,6 +151,9 @@ rm -fr docker.egg-info
 %endif # with_python3
 
 %changelog
+* Thu Nov 09 2017 Tomas Tomecek <ttomecek@redhat.com> - 2.6.1-1
+- new upstream release: 2.6.1
+
 * Wed Nov 08 2017 Tomas Tomecek <ttomecek@redhat.com> - 2.6.0-1
 - new upstream release: 2.6.0
 
