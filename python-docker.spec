@@ -43,9 +43,6 @@ BuildRequires:  python%{?fedora:2}-setuptools
 %if %{with tests}
 BuildRequires:  python2-mock >= 1.0.1
 BuildRequires:  %{?fedora:python2-}pytest >= 2.9.1
-BuildRequires:  python%{?fedora:2}-coverage >= 3.7.1
-BuildRequires:  python2-pytest-cov >= 2.1.0
-BuildRequires:  python%{?fedora:2}-flake8 >= 2.4.1
 BuildRequires:  python%{?fedora:2}-requests >= 2.14.2
 BuildRequires:  python%{?fedora:2}-six >= 1.4.0
 BuildRequires:  python-websocket-client >= 0.32.0
@@ -75,9 +72,6 @@ Summary:        Unit tests and integration tests for python-docker
 Requires:       python2-%{srcname}
 Requires:       python2-mock >= 1.0.1
 Requires:       %{?fedora:python2-}pytest >= 2.9.1
-Requires:       python%{?fedora:2}-coverage >= 3.7.1
-Requires:       python2-pytest-cov >= 2.1.0
-Requires:       python%{?fedora:2}-flake8 >= 2.4.1
 Requires:       python%{?fedora:2}-requests >= 2.14.2
 Requires:       python%{?fedora:2}-six >= 1.4.0
 Requires:       python-websocket-client >= 0.32.0
@@ -97,9 +91,6 @@ BuildRequires:  python3-setuptools
 %if %{with tests}
 BuildRequires:  python3-mock >= 1.0.1
 BuildRequires:  python3-pytest >= 2.9.1
-BuildRequires:  python3-coverage >= 3.7.1
-BuildRequires:  python3-pytest-cov >= 2.1.0
-BuildRequires:  python3-flake8 >= 2.4.1
 BuildRequires:  python3-requests >= 2.14.2
 BuildRequires:  python3-six >= 1.4.0
 BuildRequires:  python3-websocket-client >= 0.32.0
@@ -174,6 +165,7 @@ cp -avr tests/ %{buildroot}%{_libexecdir}/installed-tests/%{name}/
 * Wed Dec 27 2017 Carl George <carl@george.computer> - 2.7.0-1
 - Latest upstream rhbz#1527712
 - Drop patch1, requirements.txt does not affect final installation
+- Drop unnecessary coverage and flake8 build requirements
 
 * Tue Nov 28 2017 Tomas Tomecek <ttomecek@redhat.com> - 2.6.1-2
 - Package tests
