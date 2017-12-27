@@ -10,8 +10,8 @@
 %global srcname docker
 
 Name:           python-%{srcname}
-Version:        2.6.1
-Release:        2%{?dist}
+Version:        2.7.0
+Release:        1%{?dist}
 Summary:        A Python library for the Docker Engine API
 License:        ASL 2.0
 URL:            https://pypi.python.org/pypi/%{srcname}
@@ -50,14 +50,14 @@ BuildRequires:  %{?fedora:python2-}pytest >= 2.9.1
 BuildRequires:  python%{?fedora:2}-coverage >= 3.7.1
 BuildRequires:  python2-pytest-cov >= 2.1.0
 BuildRequires:  python%{?fedora:2}-flake8 >= 2.4.1
-BuildRequires:  python%{?fedora:2}-requests >= 2.5.2
+BuildRequires:  python%{?fedora:2}-requests >= 2.14.2
 BuildRequires:  python%{?fedora:2}-six >= 1.4.0
 BuildRequires:  python-websocket-client >= 0.32.0
 BuildRequires:  python%{?fedora:2}-docker-pycreds >= 0.2.1
 BuildRequires:  python%{?fedora:2}-backports-ssl_match_hostname >= 3.5
 BuildRequires:  python-ipaddress >= 1.0.16
 %endif  # tests
-Requires:       python%{?fedora:2}-requests >= 2.5.2
+Requires:       python%{?fedora:2}-requests >= 2.14.2
 Requires:       python%{?fedora:2}-six >= 1.4.0
 Requires:       python-websocket-client >= 0.32.0
 Requires:       python%{?fedora:2}-docker-pycreds >= 0.2.1
@@ -82,7 +82,7 @@ Requires:       %{?fedora:python2-}pytest >= 2.9.1
 Requires:       python%{?fedora:2}-coverage >= 3.7.1
 Requires:       python2-pytest-cov >= 2.1.0
 Requires:       python%{?fedora:2}-flake8 >= 2.4.1
-Requires:       python%{?fedora:2}-requests >= 2.5.2
+Requires:       python%{?fedora:2}-requests >= 2.14.2
 Requires:       python%{?fedora:2}-six >= 1.4.0
 Requires:       python-websocket-client >= 0.32.0
 Requires:       python%{?fedora:2}-docker-pycreds >= 0.2.1
@@ -104,12 +104,12 @@ BuildRequires:  python3-pytest >= 2.9.1
 BuildRequires:  python3-coverage >= 3.7.1
 BuildRequires:  python3-pytest-cov >= 2.1.0
 BuildRequires:  python3-flake8 >= 2.4.1
-BuildRequires:  python3-requests >= 2.5.2
+BuildRequires:  python3-requests >= 2.14.2
 BuildRequires:  python3-six >= 1.4.0
 BuildRequires:  python3-websocket-client >= 0.32.0
 BuildRequires:  python3-docker-pycreds >= 0.2.1
 %endif  # tests
-Requires:       python3-requests >= 2.5.2
+Requires:       python3-requests >= 2.14.2
 Requires:       python3-six >= 1.4.0
 Requires:       python3-websocket-client >= 0.32.0
 Requires:       python3-docker-pycreds >= 0.2.1
@@ -175,6 +175,9 @@ cp -avr tests/ %{buildroot}%{_libexecdir}/installed-tests/%{name}/
 %{_libexecdir}/installed-tests
 
 %changelog
+* Wed Dec 27 2017 Carl George <carl@george.computer> - 2.7.0-1
+- Latest upstream rhbz#1527712
+
 * Tue Nov 28 2017 Tomas Tomecek <ttomecek@redhat.com> - 2.6.1-2
 - Package tests
 

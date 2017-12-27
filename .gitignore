@@ -10,3 +10,4 @@
 tests/artifacts/
 tests/tests.retry
 tests/atomic.qcow2
+/docker-2.7.0.tar.gz
