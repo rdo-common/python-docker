@@ -17,10 +17,6 @@ License:        ASL 2.0
 URL:            https://pypi.python.org/pypi/%{srcname}
 Source0:        https://files.pythonhosted.org/packages/source/d/%{srcname}/%{srcname}-%{version}.tar.gz
 
-# remove version requirements on depedencies needed for testing
-# we have those in Fedora in different versions
-Patch1:         unpin-test-requirements.patch
-
 # Upstream uses environment markers to conditionally apply some dependencies.
 # Environment markers were first added in setuptools 20.6.8, so that doesn't
 # work in RHEL.  This patch converts those environment markers into simple if
@@ -177,6 +173,7 @@ cp -avr tests/ %{buildroot}%{_libexecdir}/installed-tests/%{name}/
 %changelog
 * Wed Dec 27 2017 Carl George <carl@george.computer> - 2.7.0-1
 - Latest upstream rhbz#1527712
+- Drop patch1, requirements.txt does not affect final installation
 
 * Tue Nov 28 2017 Tomas Tomecek <ttomecek@redhat.com> - 2.6.1-2
 - Package tests
