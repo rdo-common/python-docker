@@ -10,7 +10,7 @@
 %global srcname docker
 
 Name:           python-%{srcname}
-Version:        2.7.0
+Version:        3.0.1
 Release:        1%{?dist}
 Summary:        A Python library for the Docker Engine API
 License:        ASL 2.0
@@ -21,7 +21,7 @@ Source0:        https://files.pythonhosted.org/packages/source/d/%{srcname}/%{sr
 # Environment markers were first added in setuptools 20.6.8, so that doesn't
 # work in RHEL.  This patch converts those environment markers into simple if
 # statements.
-Patch2:         remove-environment-markers.patch
+Patch2: remove-environment-markers.patch
 
 # Upstream uses pip to check if the older docker-py module is installed.  We
 # handle that with an obsolete.
@@ -45,17 +45,20 @@ BuildRequires:  python2-mock >= 1.0.1
 BuildRequires:  %{?fedora:python2-}pytest >= 2.9.1
 BuildRequires:  python%{?fedora:2}-requests >= 2.14.2
 BuildRequires:  python%{?fedora:2}-six >= 1.4.0
-BuildRequires:  python-websocket-client >= 0.32.0
+BuildRequires:  python%{?fedora:2}-websocket-client >= 0.32.0
 BuildRequires:  python%{?fedora:2}-docker-pycreds >= 0.2.1
 BuildRequires:  python%{?fedora:2}-backports-ssl_match_hostname >= 3.5
-BuildRequires:  python-ipaddress >= 1.0.16
+BuildRequires:  python%{?fedora:2}-ipaddress >= 1.0.16
 %endif  # tests
 Requires:       python%{?fedora:2}-requests >= 2.14.2
 Requires:       python%{?fedora:2}-six >= 1.4.0
-Requires:       python-websocket-client >= 0.32.0
+Requires:       python%{?fedora:2}-websocket-client >= 0.32.0
 Requires:       python%{?fedora:2}-docker-pycreds >= 0.2.1
 Requires:       python%{?fedora:2}-backports-ssl_match_hostname >= 3.5
-Requires:       python-ipaddress >= 1.0.16
+Requires:       python%{?fedora:2}-ipaddress >= 1.0.16
+Requires:       python%{?fedora:2}-pyOpenSSL
+Requires:       python%{?fedora:2}-idna
+Requires:       python%{?fedora:2}-cryptography
 
 %if 0%{?fedora} >= 26
 Obsoletes:      python-docker-py < 1:2
@@ -74,10 +77,13 @@ Requires:       python2-mock >= 1.0.1
 Requires:       %{?fedora:python2-}pytest >= 2.9.1
 Requires:       python%{?fedora:2}-requests >= 2.14.2
 Requires:       python%{?fedora:2}-six >= 1.4.0
-Requires:       python-websocket-client >= 0.32.0
+Requires:       python%{?fedora:2}-websocket-client >= 0.32.0
 Requires:       python%{?fedora:2}-docker-pycreds >= 0.2.1
 Requires:       python%{?fedora:2}-backports-ssl_match_hostname >= 3.5
-Requires:       python-ipaddress >= 1.0.16
+Requires:       python%{?fedora:2}-ipaddress >= 1.0.16
+Requires:       python%{?fedora:2}-pyOpenSSL
+Requires:       python%{?fedora:2}-idna
+Requires:       python%{?fedora:2}-cryptography
 %description tests
 Upstream test-suite (unit, integration) packaged as RPM.
 
@@ -100,6 +106,9 @@ Requires:       python3-requests >= 2.14.2
 Requires:       python3-six >= 1.4.0
 Requires:       python3-websocket-client >= 0.32.0
 Requires:       python3-docker-pycreds >= 0.2.1
+Requires:       python3-pyOpenSSL
+Requires:       python3-idna
+Requires:       python3-cryptography
 
 %if 0%{?fedora} >= 26
 Obsoletes:      python3-docker-py < 1:2
@@ -162,6 +171,9 @@ cp -avr tests/ %{buildroot}%{_libexecdir}/installed-tests/%{name}/
 %{_libexecdir}/installed-tests
 
 %changelog
+* Wed Feb 07 2018 Tomas Tomecek <ttomecek@redhat.com> - 3.0.1-1
+- New upstream release 3.0.1
+
 * Wed Dec 27 2017 Carl George <carl@george.computer> - 2.7.0-1
 - Latest upstream rhbz#1527712
 - Drop patch1, requirements.txt does not affect final installation
