@@ -11,7 +11,7 @@
 
 Name:           python-%{srcname}
 Version:        3.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Python library for the Docker Engine API
 License:        ASL 2.0
 URL:            https://pypi.python.org/pypi/%{srcname}
@@ -171,6 +171,9 @@ cp -avr tests/ %{buildroot}%{_libexecdir}/installed-tests/%{name}/
 %{_libexecdir}/installed-tests
 
 %changelog
+* Fri Feb 09 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 3.0.1-2
+- Escape macros in %%changelog
+
 * Wed Feb 07 2018 Tomas Tomecek <ttomecek@redhat.com> - 3.0.1-1
 - New upstream release 3.0.1
 
@@ -385,7 +388,7 @@ cp -avr tests/ %{buildroot}%{_libexecdir}/installed-tests/%{name}/
 - python3 to be added after python3-websocket-client (BZ 1049424)
 
 * Tue Jan 07 2014 Lokesh Mandvekar <lsm5@redhat.com> 0.2.3-4
-- double '%' to comment macros
+- double '%%' to comment macros
 - check section not considered for now
 - python3- description in python3- subpackage conditional
 
