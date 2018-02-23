@@ -22,10 +22,10 @@
       - classic
     with_items:
       - python-docker-tests
-      - python2-pytest
+      - python3-pytest
 
   - name: Install pytest and the test-suite on Atomic Host
-    shell: rpm-ostree install python2-pytest python-docker-tests && rpm-ostree ex livefs
+    shell: rpm-ostree install python3-pytest python-docker-tests && rpm-ostree ex livefs
     tags:
       - atomic
 
@@ -41,7 +41,7 @@
     block:
       - name: Run integration test-suite on Atomic Host
         # -k "test_create_with_restart_policy" for local testing
-        shell: py.test -v ./tests/integration/ | tee {{ remote_artifacts }}/test.log
+        shell: py.test-3 -v ./tests/integration/ | tee {{ remote_artifacts }}/test.log
         args:
           chdir: /usr/libexec/installed-tests/python-docker/
     always:
@@ -60,7 +60,7 @@
 
   - name: Run integration test-suite locally
     # -k "test_create_with_restart_policy" for local testing
-    shell: py.test -v ./tests/integration/ | tee {{ artifacts_abs.stdout }}/test.log
+    shell: py.test-3 -v ./tests/integration/ | tee {{ artifacts_abs.stdout }}/test.log
     args:
       chdir: /usr/libexec/installed-tests/python-docker/
     tags:
