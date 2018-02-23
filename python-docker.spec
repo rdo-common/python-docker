@@ -10,8 +10,8 @@
 %global srcname docker
 
 Name:           python-%{srcname}
-Version:        3.0.1
-Release:        2%{?dist}
+Version:        3.1.0
+Release:        1%{?dist}
 Summary:        A Python library for the Docker Engine API
 License:        ASL 2.0
 URL:            https://pypi.python.org/pypi/%{srcname}
@@ -171,6 +171,9 @@ cp -avr tests/ %{buildroot}%{_libexecdir}/installed-tests/%{name}/
 %{_libexecdir}/installed-tests
 
 %changelog
+* Fri Feb 23 2018 Tomas Tomecek <ttomecek@redhat.com> - 3.1.0-1
+- New upstream release 3.1.0
+
 * Fri Feb 09 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 3.0.1-2
 - Escape macros in %%changelog
 
