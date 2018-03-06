@@ -10,7 +10,7 @@
 %global srcname docker
 
 Name:           python-%{srcname}
-Version:        3.1.0
+Version:        3.1.1
 Release:        1%{?dist}
 Summary:        A Python library for the Docker Engine API
 License:        ASL 2.0
@@ -171,6 +171,9 @@ cp -avr tests/ %{buildroot}%{_libexecdir}/installed-tests/%{name}/
 %{_libexecdir}/installed-tests
 
 %changelog
+* Tue Mar 06 2018 Tomas Tomecek <ttomecek@redhat.com> - 3.1.1-1
+- New upstream release 3.1.1
+
 * Fri Feb 23 2018 Tomas Tomecek <ttomecek@redhat.com> - 3.1.0-1
 - New upstream release 3.1.0
 
