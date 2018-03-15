@@ -1,17 +1,24 @@
-%if 0%{?rhel} != 0 && 0%{?rhel} <= 7
-# Do not build bindings for python3 for RHEL <= 7
-%bcond_with python3
-%bcond_with tests
-%else
+%if 0%{?fedora} || 0%{?rhel} > 7
+# Enable python3 build by default
 %bcond_without python3
 %bcond_without tests
+%else
+%bcond_with python3
+%bcond_with tests
+%endif
+
+%if 0%{?rhel} > 7
+# Disable python2 build by default
+%bcond_with python2
+%else
+%bcond_without python2
 %endif
 
 %global srcname docker
 
 Name:           python-%{srcname}
 Version:        3.1.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Python library for the Docker Engine API
 License:        ASL 2.0
 URL:            https://pypi.python.org/pypi/%{srcname}
@@ -33,7 +40,7 @@ BuildArch:      noarch
 It lets you do anything the docker command does, but from within Python apps –
 run containers, manage containers, manage Swarms, etc.
 
-
+%if %{with python2}
 %package -n python2-%{srcname}
 Summary:        A Python library for the Docker Engine API
 %{?python_provide:%python_provide python2-%{srcname}}
@@ -69,9 +76,15 @@ Obsoletes:      python-docker-py < 2
 %description -n python2-%{srcname}
 It lets you do anything the docker command does, but from within Python apps –
 run containers, manage containers, manage Swarms, etc.
+%endif # with python2
 
-%package tests
+%if %{with python2}
+%if %{with tests}
+%package -n python2-%{srcname}-tests
 Summary:        Unit tests and integration tests for python-docker
+
+%{?python_provide:%python_provide python2-%{srcname}-tests}
+
 Requires:       python2-%{srcname}
 Requires:       python2-mock >= 1.0.1
 Requires:       %{?fedora:python2-}pytest >= 2.9.1
@@ -84,8 +97,15 @@ Requires:       python%{?fedora:2}-ipaddress >= 1.0.16
 Requires:       python%{?fedora:2}-pyOpenSSL
 Requires:       python%{?fedora:2}-idna
 Requires:       python%{?fedora:2}-cryptography
-%description tests
+
+# Remove at Fedora 31
+Provides:       python-%{srcname}-tests = %{version}-%{release}
+Obsoletes:      python-%{srcname}-tests < %{version}-%{release}
+
+%description -n python2-%{srcname}-tests
 Upstream test-suite (unit, integration) packaged as RPM.
+%endif # tests
+%endif # with python2
 
 %if %{with python3}
 %package -n python3-%{srcname}
@@ -126,27 +146,37 @@ run containers, manage containers, manage Swarms, etc.
 rm -fr docker.egg-info
 
 %build
+%if %{with python2}
 %py2_build
+%endif # with python2
 
 %if %{with python3}
 %py3_build
 %endif # with_python3
 
 %install
+%if %{with python2}
 %py2_install
+%endif # with python2
 
 %if %{with python3}
 %py3_install
 %endif # with_python3
 
+%if %{with python2}
+%if %{with tests}
 # copy tests to /usr/libexec/installed-tests
 mkdir -p %{buildroot}%{_libexecdir}/installed-tests/%{name}
 cp -avr tests/ %{buildroot}%{_libexecdir}/installed-tests/%{name}/
+%endif # tests
+%endif # with python2
 
 %check
+%if %{with python2}
 %if %{with tests}
 %{__python2} -m pytest -v tests/unit/
-%endif
+%endif # tests
+%endif # with python2
 
 %if %{with python3}
 %if %{with tests}
@@ -154,11 +184,12 @@ cp -avr tests/ %{buildroot}%{_libexecdir}/installed-tests/%{name}/
 %endif # tests
 %endif # with_python3
 
-
+%if %{with python2}
 %files -n python2-%{srcname}
 %license LICENSE
 %doc README.md
 %{python2_sitelib}/*
+%endif # with python2
 
 %if %{with python3}
 %files -n python3-%{srcname}
@@ -167,10 +198,17 @@ cp -avr tests/ %{buildroot}%{_libexecdir}/installed-tests/%{name}/
 %{python3_sitelib}/*
 %endif # with_python3
 
-%files tests
+%if %{with python2}
+%if %{with tests}
+%files -n python2-%{srcname}-tests
 %{_libexecdir}/installed-tests
+%endif # tests
+%endif # with python2
 
 %changelog
+* Thu Mar 15 2018 Charalampos Stratakis <cstratak@redhat.com> - 3.1.1-2
+- Don't build Python 2 subpackage on EL > 7
+
 * Tue Mar 06 2018 Tomas Tomecek <ttomecek@redhat.com> - 3.1.1-1
 - New upstream release 3.1.1
 
