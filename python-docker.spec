@@ -17,8 +17,8 @@
 %global srcname docker
 
 Name:           python-%{srcname}
-Version:        3.1.1
-Release:        2%{?dist}
+Version:        3.1.3
+Release:        1%{?dist}
 Summary:        A Python library for the Docker Engine API
 License:        ASL 2.0
 URL:            https://pypi.python.org/pypi/%{srcname}
@@ -206,6 +206,9 @@ cp -avr tests/ %{buildroot}%{_libexecdir}/installed-tests/%{name}/
 %endif # with python2
 
 %changelog
+* Wed Mar 21 2018 Tomas Tomecek <ttomecek@redhat.com> - 3.1.3-1
+- New upstream release 3.1.3
+
 * Thu Mar 15 2018 Charalampos Stratakis <cstratak@redhat.com> - 3.1.1-2
 - Don't build Python 2 subpackage on EL > 7
 
