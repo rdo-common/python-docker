@@ -28,7 +28,7 @@ Source0:        https://files.pythonhosted.org/packages/source/d/%{srcname}/%{sr
 # Environment markers were first added in setuptools 20.6.8, so that doesn't
 # work in RHEL.  This patch converts those environment markers into simple if
 # statements.
-Patch2: remove-environment-markers.patch
+Patch1: remove-environment-markers.patch
 
 BuildArch:      noarch
 
