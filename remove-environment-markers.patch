@@ -1,12 +1,9 @@
-Generate requirements list dynamically instead of using environment markers.
-This allows using versions of setuptools older than 20.6.8.
-
 diff --git a/setup.py b/setup.py
-index 271d94f..d7b26cd 100644
+index c1eabcf..e083879 100644
 --- a/setup.py
 +++ b/setup.py
-@@ -26,29 +26,17 @@ requirements = [
-     'docker-pycreds >= 0.2.2'
+@@ -16,29 +16,17 @@ requirements = [
+     'docker-pycreds >= 0.2.3'
  ]
  
 -extras_require = {
@@ -44,7 +41,7 @@ index 271d94f..d7b26cd 100644
  
  version = None
  exec(open('docker/version.py').read())
-@@ -75,7 +63,6 @@ setup(
+@@ -65,7 +53,6 @@ setup(
      packages=find_packages(exclude=["tests.*", "tests"]),
      install_requires=requirements,
      tests_require=test_requirements,

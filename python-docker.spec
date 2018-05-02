@@ -17,7 +17,7 @@
 %global srcname docker
 
 Name:           python-%{srcname}
-Version:        3.2.1
+Version:        3.3.0
 Release:        1%{?dist}
 Summary:        A Python library for the Docker Engine API
 License:        ASL 2.0
@@ -29,10 +29,6 @@ Source0:        https://files.pythonhosted.org/packages/source/d/%{srcname}/%{sr
 # work in RHEL.  This patch converts those environment markers into simple if
 # statements.
 Patch2: remove-environment-markers.patch
-
-# Upstream uses pip to check if the older docker-py module is installed.  We
-# handle that with an obsolete.
-Patch3:         remove-pip-dependency.patch
 
 BuildArch:      noarch
 
@@ -206,6 +202,9 @@ cp -avr tests/ %{buildroot}%{_libexecdir}/installed-tests/%{name}/
 %endif # with python2
 
 %changelog
+* Wed May 02 2018 Tomas Tomecek <ttomecek@redhat.com> - 3.3.0-1
+- New upstream release 3.3.0
+
 * Tue Apr 03 2018 Tomas Tomecek <ttomecek@redhat.com> - 3.2.1-1
 - New upstream release 3.2.1
 
