@@ -1,5 +1,5 @@
 diff --git a/setup.py b/setup.py
-index c1eabcf..f4916ff 100644
+index 57b2b5a..201b0b7 100644
 --- a/setup.py
 +++ b/setup.py
 @@ -3,6 +3,7 @@ from __future__ import print_function
@@ -11,7 +11,7 @@ index c1eabcf..f4916ff 100644
  from setuptools import setup, find_packages
  
 @@ -16,29 +17,14 @@ requirements = [
-     'docker-pycreds >= 0.2.3'
+     'docker-pycreds >= 0.3.0'
  ]
  
 -extras_require = {
