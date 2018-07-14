@@ -18,7 +18,7 @@
 
 Name:           python-%{srcname}
 Version:        3.4.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        A Python library for the Docker Engine API
 License:        ASL 2.0
 URL:            https://pypi.python.org/pypi/%{srcname}
@@ -202,6 +202,9 @@ cp -avr tests/ %{buildroot}%{_libexecdir}/installed-tests/%{name}/
 %endif # with python2
 
 %changelog
+* Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 3.4.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
 * Mon Jul 02 2018 Miro Hrončok <mhroncok@redhat.com> - 3.4.1-2
 - Rebuilt for Python 3.7
 
