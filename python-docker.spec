@@ -63,11 +63,7 @@ Requires:       python%{?fedora:2}-pyOpenSSL
 Requires:       python%{?fedora:2}-idna
 Requires:       python%{?fedora:2}-cryptography
 
-%if 0%{?fedora} >= 26
 Obsoletes:      python-docker-py < 1:2
-%else
-Obsoletes:      python-docker-py < 2
-%endif
 
 %description -n python2-%{srcname}
 It lets you do anything the docker command does, but from within Python apps –
